@@ -15291,9 +15291,16 @@ const dictionary = [
     "shave"
 ]
 
+const guessGrid = document.querySelector('[data-guess-grid]')
+
 function startInteraction() {
     document.addEventListener("click", handleMouseClick)
     document.addEventListener("keydown", handleKeyPress)
+}
+
+function stopInteraction() {
+    document.removeEventListener("click", handleMouseClick)
+    document.removeEventListener("keydown", handleKeyPress)
 }
 
 function handleMouseClick(e) {
@@ -15322,4 +15329,16 @@ function handleKeyPress(e) {
         deleteKey()
         return
     }
+
+    if(e.key.match(/^[a-z]$/)) {
+        pressKey(e.key)
+        return
+    }
+}
+
+function pressKey(key) {
+    const nextTile = guessGrid.querySelector(":not([data-letter])")
+    nextTile.dataset.letter = key.toLowerCase()
+    nextTile.textContent = key
+    nextTile.dataset.state = "active"
 }
