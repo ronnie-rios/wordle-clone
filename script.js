@@ -15311,3 +15311,15 @@ function handleMouseClick(e) {
         return
     }
 }
+
+function handleKeyPress(e) {
+    if(e.key==="Enter") {
+        submitGuess()
+        return
+    }
+
+    if(e.key==="Backspace" || e.key==="Delete") {
+        deleteKey()
+        return
+    }
+}
