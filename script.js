@@ -15337,8 +15337,14 @@ function handleKeyPress(e) {
 }
 
 function pressKey(key) {
+    const activeTiles = getActiveTiles()
+    if (activeTiles.length >= 5 ) return
     const nextTile = guessGrid.querySelector(":not([data-letter])")
     nextTile.dataset.letter = key.toLowerCase()
     nextTile.textContent = key
     nextTile.dataset.state = "active"
+}
+
+function getActiveTiles() {
+    return guessGrid.querySelectorAll('[data-state=active]')
 }
