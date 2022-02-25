@@ -15361,6 +15361,9 @@ function deleteKey(){
 
 function submitGuess(){
     const activeTiles = [...getActiveTiles()]
+    if (activeTiles.length !== WORD_LENGTH ) {
+        showAlert('not enough letters')
+    }
 }
 
 function getActiveTiles() {
