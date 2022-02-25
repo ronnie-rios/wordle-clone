@@ -15292,6 +15292,11 @@ const dictionary = [
 ]
 const WORD_LENGTH = 5
 const guessGrid = document.querySelector('[data-guess-grid]')
+const offsetFromDate = new Date(20221, 0 , 1);
+const msOffset = Date.now() - offsetFromDate
+const dayOffset = msOffset / 1000 / 60 / 60 /24;
+
+const targetWord = targetWords[Math.floor(dayOffset)]
 
 function startInteraction() {
     document.addEventListener("click", handleMouseClick)
@@ -15343,6 +15348,19 @@ function pressKey(key) {
     nextTile.dataset.letter = key.toLowerCase()
     nextTile.textContent = key
     nextTile.dataset.state = "active"
+}
+
+function deleteKey(){
+    const activeTiles = getActiveTiles()
+    const lastTitle = activeTiles[activeTiles.length - 1]
+    if (lastTitle==null) return
+    lastTitle.textContent = ""
+    delete lastTitle.dataset.state
+    delete lastTitle.dataset.letter
+}
+
+function submitGuess(){
+    const activeTiles = [...getActiveTiles()]
 }
 
 function getActiveTiles() {
